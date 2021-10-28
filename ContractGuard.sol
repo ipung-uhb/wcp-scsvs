@@ -16,7 +16,7 @@ contract guardReentrancy is ReentrancyGuard{
 
     function withdraw(uint withdrawAmount) nonReentrant() external returns (uint) {
            	require(withdrawAmount <= balances[msg.sender]);
-    		msg.sender.call.value(withdrawAmount)("");
+    		msg.sender.call{value:withdrawAmount}("");
     
     		balances[msg.sender] -= withdrawAmount;
     		return balances[msg.sender];
